@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <p>{{ msg }}</p>
+    </div>
+
+    <script>
+        new Vue({
+            el : "#app",
+            data : {
+                msg : "좋은 아침입니다"
+            },
+            template : `<div> 
+                <h1>h1요소 출력</h1>
+                <p>template로 작성된 p요소입니다</p>
+                <p>{{ msg }}</p>
+                </div>
+            `
+        });
+        // template로 작성한 문구는 그대로 body에 붙여준다고 생각하면 됨
+    </script>
+    
+</body>
+</html>

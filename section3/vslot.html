@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <!--v-slot을 사용하면 슬롯의 이름과 값을 함께 사용할수있다.-->
+    <div id="app">
+        <show-picture> 
+            <template v-slot:cat="{catsname}">
+                <div v-for="item in catsname">
+                    <p>{{item.name}}</p>
+                    <img src="" alt="" v-bind:src="item.src" width="100">
+                </div>
+            </template>
+            
+            <template v-slot:age>
+                1살
+            </template>
+        </show-picture>
+    </div>
+
+    <script>
+        Vue.component('show-picture',{
+            template :
+            `<div>
+                <slot name='cat' v-bind:catsname="cname"></slot>
+                <slot name='age'></slot>
+            </div>`,
+            data : function() {
+                return {
+                    cname : [
+                        {name :"랙돌", src : "./img/cat1.jpg"},
+                        {name: "코리안숏", src : "./img/cat1.jpg"},
+                        {name: "러시안블루", src :"./img/cat1.jpg"}
+                    ]
+                }
+            }
+        })
+
+        // 1. 속성의 값을 객체의 배열로 전달했을때 이름 출력하기
+        // 2. 이미지 태그에 src값을 넣어 이미지 출력하기
+
+        new Vue({
+            el : "#app",
+            data : {}
+        })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <button @click="sayHello1">버튼을 눌러주세요</button>
+        <button @click="sayHello2" @mouseleave="sayHello2">버튼을 눌러주세요</button>
+
+        <br>
+        <br>
+        <input type="text" v-model="text">
+        <button v-on:click="showalert">누르면 alert이 발생합니다</button>
+
+    </div>
+
+    <script>
+        new Vue({
+            el : "#app",
+            data : {
+                message : "hi",
+                text : ""
+            },
+            methods : {
+                sayHello1 : function() {
+                    alert(this.message);
+                },
+                sayHello2(e) {
+                    if(e.type == "mouseleave") {
+                        alert("마우스가 벗어났습니다")
+                    }
+                    else {
+                        alert(this.message);
+                    }    
+                },
+                showalert() {
+                    alert(this.text+"님 data의 메세지 입니다");
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

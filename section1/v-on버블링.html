@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style>
+        .div {
+            background-color: bisque;
+            border: black 1px solid;
+        }
+        p {
+            background-color: burlywood;
+            border: black 1px solid;
+        }
+        span {
+            background-color: brown;
+            border: black 1px solid;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="app"> 
+        <!--
+            겹쳐있는 태그에 대해 이벤트 발생이 겹겹이 발생 
+            (버블링 = 안에서부터 밖으로 이벤트가 올라옴)
+            을 막기위해선 stop을 이용해서 끊어주거나 
+            밑의 스크립트 메소드 옵션중 stopPropagation()으로 끊어준다.
+        -->
+        <div class="div" @click="msg" id="div">
+            <p @click.stop="msg" id="p">p태그 안의 <span @click.stop="msg" id="span">span태그</span>입니다</p>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el : "#app",
+            data : {
+
+            },
+            methods : {
+                msg(e) {
+                    //e.stopPropagation();
+                    return alert(e.target.id + ":" + e.currentTarget.id);
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

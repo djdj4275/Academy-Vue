@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+        <v-app>
+            <v-app-bar app color="primary">
+                <v-toolbar-title class="white--text mx-auto">그리드와 카드UI</v-toolbar-title>
+            </v-app-bar>
+
+            <v-content>
+                <v-container>
+                    <!-- 
+                        cols : 열의 갯수를 지정 1~12 지정하지않으면 flex형식으로 자동지정
+                        cols만 사용하면 화면 크기에 상관없이 개수에 맞춤
+                    -->
+
+                    <!-- 
+                        화면크기에 맞춘 중단점 : 
+                        중단점 하나만 썼을경우 그 크기일경우에만 주어진 열의 공간차지
+                        크기를 벗어났을때 cols혹은 중단점 값이 없으면 auto로 들어간다
+                    -->
+                    <!-- sm : 노트북화면일 경우 그리드 내용이 반만차지 -->
+                    <v-row>
+                        <v-col cols="12" sm="9" md="6">
+                            <v-card>
+                                <v-img src="https://picsum.photos/id/1068/400/300" aspect-ratio="2.3"></v-img>
+                                <v-card-text>
+                                    <!-- title(뷰티파이에서 만들어준 글꼴크기) -->
+                                    <h2 class="title primary--text mb-2"> 시대정신 선도 </h2>
+                                    버추얼 컴퍼니에 관심을 가져주셔서 감사합니다.
+                                </v-card-text>
+                            </v-card>
+                        </v-col>
+                        <v-col cols="12" sm="3" md="6">
+                            <v-card>
+                                <v-img src="https://picsum.photos/id/1068/400/300" aspect-ratio="2.3"></v-img>
+                                <v-card-text>
+                                    <!-- title(뷰티파이에서 만들어준 글꼴크기) -->
+                                    <h2 class="title primary--text mb-2"> 시대정신 선도 </h2>
+                                    버추얼 컴퍼니에 관심을 가져주셔서 감사합니다.
+                                </v-card-text>
+                            </v-card>
+                            <v-card>
+                                <v-img src="https://picsum.photos/id/1068/400/300" aspect-ratio="2.3"></v-img>
+                                <v-card-text>
+                                    <!-- title(뷰티파이에서 만들어준 글꼴크기) -->
+                                    <h2 class="title primary--text mb-2"> 시대정신 선도 </h2>
+                                    버추얼 컴퍼니에 관심을 가져주셔서 감사합니다.
+                                </v-card-text>
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-content>
+
+            <v-footer color="primary" dark>
+                <div class="mx-auto"> Copyright &copy; {{ new Date().getFullYear() }} </div>
+            </v-footer>
+        </v-app>
+    </div>
+
+
+
+    <script>
+        new Vue({
+            el : "#app",
+            vuetify : new Vuetify(),
+        })
+    </script>
+
+</body>
+</html>

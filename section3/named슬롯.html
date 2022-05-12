@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <named-component> <!--slot의 이름을 이용해 값을 넣어줌-->
+            <div slot="movie">
+                <img src="" alt="스파이더맨포스터">
+                <p>스파이더맨</p>
+            </div> <!--여러개의 슬롯을 이용하여 다른 값을 넣어줄수있다.-->
+            <p slot="rate">5점</p>
+        </named-component>
+
+        <name-component>
+            <div slot="person">
+                <img src="https://cdn.pixabay.com/photo/2020/03/09/17/51/narcis-4916584_960_720.jpg" alt="" width="100">
+                <p>홍길동</p>
+            </div>
+            <p slot="depart">개발팀</p>
+        </name-component>
+    </div>
+
+    <script>
+
+        Vue.component('named-component', {
+            template : 
+            `<div>
+                <h3>영화</h3>
+                <slot name='movie'></slot>
+                <p>평점</p>
+                <slot name='rate'></slot>
+            </div>`
+        })
+
+        Vue.component('name-component',{
+            template :
+            `<div>
+                <h3>인사관리카드</h3>
+                <slot name='person'></slot>
+                <p>부서 : </p>
+                <slot name='depart'></slot>
+            </div>`
+        })
+
+        new Vue({
+            el : "#app",
+            data : {},
+        })
+    </script>
+
+</body>
+</html>

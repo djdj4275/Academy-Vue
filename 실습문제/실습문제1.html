@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style>
+        li { list-style-type: none;}
+        .product {
+        border-radius: 20px;
+        border: solid gainsboro 1px;
+        width: 400px;
+        text-align: center;
+        padding: 10px 0;
+        }
+        .product img{ 
+        width: 300px;
+        border-radius: 10px;
+        }
+        .product button{ 
+        border: none;
+        background-color: transparent;
+        font-size: large;
+        color: darkgray;
+        cursor: pointer;
+        }
+        .product button.on{ 
+        border: none;
+        background-color: transparent;
+        font-size: large;
+        color: red;
+        }
+        </style>
+</head>
+<body>
+    
+    <!-- 디렉티브 1번문제 -->
+    <!-- 
+        <button v-on:click="changeMessage"></button>
+    -->
+    <!-- 디렉티브 2번문제 -->
+    <!-- 
+        <button v-on:click="check = !check"></button>
+    -->
+    <!-- 디렉티브 3번문제 -->
+    <!-- @ -->
+    
+    <!-- v-for/key 1번문제 -->
+    <!-- 
+        array : ['mine','it','record']  (v-for="m in array") {{m}} 
+        obj : [{name : "홍길동", age : 18 }, {name : "성춘향", age : 20}] (v-for="m in obj") {{m.name}}
+        num : 5, (v-for="m in num") {{m}} ..... 1,2,3,4,5
+    -->
+
+    <!-- v-for/key 2번문제 -->
+    <!-- 3번-->
+
+    <!-- v-bind 1번문제-->
+    <!-- <input type="text" v-bind:class="className" -->
+    <!-- <input type="text" v-bind:class="colorStyle+'_style'" -->
+    <!-- <input type="text" v-bind:class="{on : buttonOn}"-->
+
+    <!-- v-bind 2번문제-->
+    <!-- <img v-bind:src="srclmg" -->
+
+    <!-- v-bind 3번문제-->
+    <!-- : -->
+
+    <!-- v-model 1번문제 -->
+    <!-- 연결되어있는 한쪽이 바뀌면 다른 한쪽도 바뀜 -->
+
+    <!-- v-model 2번문제 -->
+    <!-- 안에 적히는 text 값 -->
+
+    <!-- 컴포넌트 1번문제 -->
+    <!-- props : ['name', 'age'] -->
+
+    <!-- 컴포넌트 2번문제 -->
+    <!-- 
+        template : 
+        `
+        <input type="text" v-model="this.name">
+        `
+    -->
+
+    <!-- 컴포넌트 3번문제 -->
+    <!-- 
+        methods : {
+            names : function() {
+                return this.name;
+            }
+        } 
+    -->
+
+    <!-- data 1번문제 -->
+    <!-- 
+        data : function() {
+            return {
+                name : "",
+                id : "",
+            }
+        }
+    -->
+
+    <!-- 사용자정의 이벤트 $emit 1번문제 -->
+    <!-- 자식요소에 있는값을 한가지 들고서 부모요소에서 사용자정의 이벤트를 하나 정해 실행시킴 -->
+
+    <!-- 사용자정의 이벤트 $emit 2번문제 -->
+    <!-- 
+        <자식>      <button @click="childMethod"></button>
+                    childMethod : function() {
+                    this.$emit('my-event', "")
+                }
+        <부모>      <input type="text" @my-event="parentMethod">
+                    parentMethod : ~~~~
+    -->
+
+    <!-- 재사용을 위한 슬롯 1번문제 -->
+    <!-- 
+        그냥 unnamed
+        v-slot을 쓴다면 <template v-slot:이름>을 해두고 컴포넌트 안의 template 창에 slot을 name:이름이라 해줌
+    -->
+
+    <!-- 재사용을 위한 슬롯 2번문제 -->
+    <!-- 
+        각각의 name을 정해주는게 좋음
+        (위와동일)
+    -->
+
+    <!-- 재사용을 위한 슬롯 3번문제 -->
+    <!-- 
+        Vue.component('slot2-component',{
+            template : 
+            `<div>
+                <slot name:one></slot>
+                <slot name:two></slot>
+            </div>`
+        })
+        
+        <slot2-component>
+            <template v-slot:one>
+                1번슬롯
+            </template>
+            <template v-slot:two>
+                2번슬롯
+            </template>
+        </slot2-component>
+    -->
+
+    <!-- 마지막 실습 문제는 밑에서 -->
+
+    <div id="app">
+        <samsung></samsung>
+    </div>
+
+    <script>
+
+        Vue.component('samsung',{
+            data : function() {
+                return {
+                    class : "",
+                    c : true,
+                }
+            },
+            methods : {
+                on : function() {
+                    return [
+                        this.class = "on",
+                        this.c = false,
+                    ]
+                },
+                off : function() {
+                    return [
+                        this.class = "",
+                        this.c = true,
+                    ]
+                }
+            },
+            template : 
+            `
+                <div class="product">
+                <img src="./Ultra_Skyblue_01.webp" alt="">
+                <h3>Galaxy S22 Ultra</h3>
+                <p>
+                    디스플레이 : 178.55mm <br>
+                    CPU종류 : Octa-Core
+                </p>
+                <button v-if="c" @click="on" v-bind:class="this.class">♥</button>
+                <button v-else @click="off" v-bind:class="this.class">♥</button>
+        </div>
+            `
+        })
+
+        new Vue({
+            el : "#app",
+            data : {
+                check : false,
+            },
+            methods : {
+                changeMessage : function() {}
+            }
+        })
+
+    </script>
+
+</body>
+</html>

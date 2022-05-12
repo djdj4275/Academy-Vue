@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <p>{{count}}</p>
+        <counter-component v-on:counter="receiveCounter"></counter-component>
+        <!-- couter라는 함수로서 실행되어 기능으로서 receiveCounter함수를 실행 -->
+    </div>
+
+    <script>
+        
+        Vue.component('counter-component',{
+            template : 
+            `
+            <div>
+                <button @click="count += 1">{{count}}</button>
+                <button @click="sendCounter">부모로 값을 전달</button>
+            </div>
+            `,
+            data : function() {
+                return {
+                    count : 0
+                };
+            },
+            methods : {
+                sendCounter : function() {
+                    this.$emit('counter',this.count) //this.count 값을 들고 counter라는 이벤트 발생
+                }
+            }
+        })
+
+        new Vue({
+            el : "#app",
+            data : {
+                count : "아직 값을 전달받지않았습니다"
+            },
+            methods : {
+                receiveCounter : function(msg) {
+                    this.count = msg; //현재의 count정의를 들고온 this.count값으로 변환
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

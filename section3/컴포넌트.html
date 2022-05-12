@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <my-comp v-for="n in 3"></my-comp>
+        <pre-comp v-for="n in 5"></pre-comp>
+        
+
+
+    </div>
+
+    <script>
+
+        Vue.component('my-comp', {
+            template : `<div>직접만든 컴포넌트입니다</div>`
+        })
+        Vue.component('pre-comp', {
+            template : `<div>두번째 컴포넌트입니다</div>`
+        })
+
+        new Vue({
+            el : "#app",
+            data : {},
+        });
+    </script>
+
+</body>
+</html>

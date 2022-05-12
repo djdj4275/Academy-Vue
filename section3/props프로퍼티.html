@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    
+    <div id="app">
+        <input type="text" v-model="message">
+        <!-- Vue인스턴스가 부모가 되어 v-bind를 통해 message를 전달  -->
+        <child-component v-bind:childmessage="message"></child-component>
+
+        <!-- parent컴포넌트가 부모가 되어 v-bind를 통해 message 전달 -->
+        <parent-component></parent-component>
+
+        <!-- v-bind가 아닌 속성의 이름으로 전달하는 그 값이 문자열로 전달 -->
+        <child-component childmessage="message"></child-component>
+
+        <p>
+            이름을 작성해주세요
+            <input type="text" v-model="name">
+        </p>
+        <!-- 배열의 값을 인덱스로 접근 -->
+        <simple-component v-bind:childname="name[0]" age="20"></simple-component>
+        <simple-component v-bind:childname="name[1]" age="10"></simple-component>
+
+        <children-component v-bind:childname="names"></children-component>
+        <children-component2 v-bind:childname="n" v-for="n in names"></children-component2>
+    </div>
+
+    <script>
+        Vue.component('parent-component', {
+            template : 
+            `
+            <div>
+                <input type="text" v-model="message">
+                <p>부모 컴포넌트입니다</p>
+                <child-component v-bind:childmessage="message"></child-component>
+            </div>
+            `,
+            data : function() {
+                return {
+                    message : '부모컴포넌트의 메세지'
+                };
+            }
+        })
+
+        Vue.component('child-component', {
+            // 태그에서 속성처럼 사용하여 값을 들고옴, 배열
+            props : ['childmessage'], 
+            template :
+            `
+            <div>
+                <!-- data와 동일하게 사용 -->
+                <p>{{childmessage}}</p>
+            </div>
+            `
+        })
+
+        Vue.component('simple-component',{
+            // html의 속성=값 형식으로 외부에서 받아오는 값
+            props : ['childname','age'], // props는 값을 전달받기위한 속성
+            template : 
+            `
+            <div>
+                <p>자식 컴포넌트에 작성되고 있습니다 : {{childname}}</p>
+                <p>{{age}}세입니다</p>
+                <p>{{adress}}에 거주중입니다</p>
+            </div>
+            `,
+            // Vue 컴포넌트 내부에서 사용되는 값
+            data : function() {
+                return {
+                    adress : "부산"
+                }
+            }
+        })
+
+        Vue.component('children-component',{
+            props : ['childname'],
+            template : 
+            `
+            <div>
+                <p>자식 컴포넌트에 작성되고 있습니다 : {{childname[0]}}</p>
+                <p>자식 컴포넌트에 작성되고 있습니다 : {{childname[1]}}</p>
+            </div>
+            `
+        })
+
+        Vue.component('children-component2',{
+            props : ['childname'],
+            template : 
+            `
+            <div>
+                <p>자식 컴포넌트에 작성되고 있습니다 : {{childname}}</p>
+            </div>
+            `
+        })
+
+        new Vue({
+            el : "#app",
+            data : {
+                message : "부모의 메세지",
+                name : ["a","b"],
+                names : ["철수","영희"],
+            },
+        });
+
+    </script>
+</body>
+</html>

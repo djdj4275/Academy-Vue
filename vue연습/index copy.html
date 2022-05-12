@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+
+    <div id="app">
+        <h1 v-bind:style="onStyle">{{school}}</h1>
+
+        <p v-if="login">{{name}}님 반갑습니다</p>
+        <div v-else>
+            <input type="text" required v-model="name"> 
+            <button v-on:click="loginBtn">login</button>
+        </div>
+
+        <h3> 학생 리스트</h3>
+        <table>
+            <tr>
+                <td>번호</td>
+                <td>이름</td>
+            </tr>
+            <tr v-for="student in students">
+                <td>{{student.number}}</td>
+                <td>{{student.name}}</td>
+            </tr>
+        </table>
+        
+        <h3>학생추가</h3>
+        <form v-on:submit.prevent="onSubmit">
+            <label>이름</label>
+            <input type="text" v-model="studentName">
+            <label >점수</label>
+            <input type="text" v-model="studentScore">
+            <input type="submit" value="Submit">
+        </form>
+        <p>평균 : {{avrCalc}}</p>
+    </div>
+
+    <script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            login : false,
+            name : "",
+            onStyle : {color : "blue"},
+            school : "00학교",
+            studentName : "",
+            studentScore : 0,
+            students : [
+                {number : 1, name : "홍길동", score : 80},
+                {number : 2, name : "성춘향", score : 70},
+                {number : 3, name : "콩쥐", score : 90},
+            ],
+        },
+        methods : {
+            loginBtn : function() {
+                this.login = true;
+            },
+            onSubmit : function() {
+                if (this.studentScore>100) {
+                    this.studentScore = 100;
+                }
+                this.students.push({
+                    number : this.students.length+1,
+                    name : this.studentName,
+                    score : parseInt(this.studentScore)
+                })
+            }
+        },
+        computed : {  
+            avrCalc : function() {
+                let sum = 0;
+                for (student of this.students) {
+                    sum += student.score;
+                }
+                return sum/this.students.length; 
+                // 그냥 들고오면 값을 문자열로 들고오기때문에 위 score값을 정수로 오게끔 
+                // parseInt해주면 숫자로 들고옴
+            }
+        }
+    });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+        <v-app>
+            <v-btn @click="fade = !fade">Fade</v-btn>
+            <v-fade-transition>
+                <h1 v-show="fade">fade</h1>
+            </v-fade-transition>
+
+            <v-btn @click="slide = !slide">slide</v-btn>
+            <v-slide-x-transition>
+                <h1 v-show="slide">slide</h1>
+            </v-slide-x-transition>
+
+            <v-btn @click="num += 1">slide</v-btn>
+            <v-card>
+                <v-slide-x-transition group>
+                <!-- 트랜지션은 한개의 요소에 적용이 되기때문에 여러개에 적용시 group적용 -->
+                    <!-- for문 작성시 v-bind:key로 키를 지정해줘야 제대로 적용이 됨 -->
+                    <v-list-item v-for="n in num" :key="n">
+                        <v-list-item-content>
+                            <v-list-item-title>아이템 추가 {{n}}</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-slide-x-transition>
+            </v-card>
+            
+        </v-app>
+    </div>
+
+
+    <script>
+        new Vue({
+            el : "#app",
+            vuetify : new Vuetify(),
+            data : {
+                fade : false,
+                slide : false,
+                num : 1,
+            }
+        })
+    </script>
+
+</body>
+</html>

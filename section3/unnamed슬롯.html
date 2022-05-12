@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+
+        <slot-component>
+            새로운 값을 넣어줍니다 <!--넣어준 값이 slot태그안에 들어가서 출력됨-->
+        </slot-component>
+        <slot-component>
+            <p>태그를 작성해서 넣어줍니다</p>
+            <p>전체내용이 slot에 들어갑니다</p>
+        </slot-component>
+
+        <link-component url="https://www.naver.com/">
+            네이버
+        </link-component>
+        <link-component url="https://www.daum.net/"> <!--링크컴포넌트의 속성 url을 정의-->
+            다음
+        </link-component>
+        <link-component v-bind:url="naver"> <!-- v-bind란 자기위의 요소의 데이터에 연결한다는것-->
+            예시
+        </link-component> <!--각각의 컴포넌트안의 template는 컴포넌트 자체가 위의 요소이고-->
+                        <!--컴포넌트 자체에 v-bind를 걸면 위의 요소인 vue인스턴스에서 찾음-->
+        <input type="text" v-model="memo">
+        <button @click="addMemo">추가</button>
+        <memo-component v-for="m in memolist">{{m}}</memo-component>
+
+    </div>
+
+    <script>
+        Vue.component('slot-component',{
+            template :
+            `
+            <div>
+                <h3>슬롯입니다</h3>
+                <slot></slot>
+            </div>
+            `
+        })
+        
+        // props는 컴포넌트의 속성을 만들어주고, 
+        // v-bind는 상위 요소속성에 접근해 부모의 데이터값으로 바꿈
+        Vue.component('link-component',{ 
+            props : ['url'], // props는 태그에서 사용하는 속성=속성값과 동일
+            template :
+            `
+            <div>
+                <p>슬롯사용</p>
+                <a v-bind:href="url">
+                    <slot></slot>
+                </a>
+            </div>
+            `
+        })
+
+        Vue.component('memo-component',{
+            template :
+            `
+            <div>
+                <h3>메모</h3>
+                <slot></slot>
+                <p>{{time}}</p>
+            </div>
+            `,
+            data : function() {
+                return {
+                    time : new Date()
+                }
+            }
+        })
+
+        new Vue({
+            el : "#app",
+            data : {
+                memo : "",
+                memolist : [],
+                naver : "https://www.naver.com/"
+            },
+            methods : {
+                addMemo : function() {
+                    this.memolist.push(this.memo);
+                    this.memo = "";
+                }
+            }
+        })
+
+    </script>
+</body>
+�/htML�

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    
+    <div id="app">
+        <h2>v-model</h2>
+        <!--
+            v-model은 form요소들을 통해 값을 양방향으로 가져올수있다
+            input text, input checkbox, input radio
+        -->
+        <input type="text" v-model="name">
+        <p>{{name}}</p>
+        <input type="checkbox" v-model="checked">
+        <span>수업을 듣고있나요? {{ checked ? "예" : "아니오"}}</span>
+    </div>
+
+    <script>
+        new Vue({
+            el : "#app",
+            data : {
+                name : "",
+                checked : false
+            }
+        });
+    </script>
+
+</body>
+</html>

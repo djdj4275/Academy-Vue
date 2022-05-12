@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+        <v-app>
+            <v-layout justify-center> <!--justify-center 는 가운데정렬-->
+                <v-btn @click="dialog = true" color="primary">결제</v-btn>
+
+                <!-- v-dialog는 v-model(boolean값)을 이용해서 화면을 출력하거나 출력하지않는다. -->
+                <!-- persistent 속성을 사용하여 버튼이 아닌 다른곳을 눌렀을때 꺼지지 않게함 -->
+                <!-- v-dialog는 카드형식말고도 다른형식도 띄울수있음 -->
+                <v-dialog v-model="dialog" max-width="400">
+                    <v-card>
+                        <v-card-title>동유럽 여행</v-card-title>
+                        <v-card-text>전 과정 4성급 호텔, 결제하시겠습니까?</v-card-text>
+                        <v-card-actions>
+                            <v-spacer></v-spacer> <!--v-spacer로 공간을 만듬-->
+                            <v-btn @click="btnClick" color="green darken-1">취소</v-btn>
+                            <v-btn @click="btnClick" color="green darken-1">확인</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+            </v-layout>
+        </v-app>
+    </div>
+
+
+
+    <script>
+        new Vue({
+            el : "#app",
+            vuetify : new Vuetify(),
+            data : {
+                dialog : false,
+            },
+            methods : {
+                btnClick : function(e) { //e(이벤트값)을 받는이유는 취소버튼인지 확인버튼인지 알기위해
+                    // Vue도 자바스크립트의 프레임워크이기 때문에 자바스크립트의 내용을 쓸수있다.
+                    if (e.target.innerHTML == "확인") {
+                        console.log("결제가 진행됩니다");
+                    }
+                    this.dialog = false;
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

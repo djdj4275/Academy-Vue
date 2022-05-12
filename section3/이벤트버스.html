@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <news-component></news-component>
+        <cencel-component></cencel-component>
+        <person-component></person-component>
+    </div>
+
+    <script>
+        const EventBus = new Vue() //모든 컴포넌트가 접근가능하게끔 가상의 이벤트자리 만들어줌
+
+        Vue.component('person-component',{
+            template : 
+            `
+            <div>
+                <p>구독자 확인 : {{count}}</p>
+            </div>
+            `,
+            data : function() {
+                return {
+                    count : 0,
+                }
+            },
+            created() { // 자바에서 값이 변경될때마다 실행
+                EventBus.$on('add', () => { //add라는 함수 실행시 count 올림 (2)
+                    this.count++;
+                })
+                EventBus.$on('minus', () => {
+                    this.count--;
+                })
+                console.log("created");
+            },
+            mounted() {
+                console.log("mounted");
+            }
+        })
+        
+        Vue.component('news-component',{
+            template : 
+            `
+            <div>
+                <button @click="addCount">신문발행 : {{count}}</button>
+            </div>
+            `,
+            data : function() {
+                return {
+                    count : 0,
+                }
+            },
+            methods : {
+                addCount : function() {
+                    this.count ++;
+                    // 구독자에게 보낼 사용자 정의 이벤트 생성필요
+                    EventBus.$emit('add') // add라는 이벤트 생성후 실행 (1)
+                }
+            }
+        })
+
+        Vue.component('cencel-component',{
+            template :
+            `
+            <div>
+                <button @click="addCount">구독취소 : {{count}}</button>
+            </div>
+            `,
+            data : function() {
+                return {
+                    count : 0,
+                }
+            },
+            methods : {
+                addCount : function() {
+                    this.count ++;
+                    EventBus.$emit('minus')
+                }
+            }
+        })
+
+
+        new Vue({
+            el : "#app",
+            data : {},
+        });
+    </script>
+
+</body>
+</html>

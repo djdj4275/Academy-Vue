@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    
+    <div id="app">
+        <button v-on:click="error = !error">
+            error true/false
+        </button>
+        <p v-if="error">에러 발생 : 이미지를 로드하지 못했습니다.</p>
+        <p v-else-if="appear">에러는 발생하지 않았지만 그림은 없습니다.</p>
+        <p v-else>마지막 else로 만들어진 p요소입니다</p>
+
+        <button v-on:click="login = !login">임시로그인 버튼</button>
+        <p v-if="login">
+            {{id}}님이 로그인을 하였습니다
+        </p>
+        <p v-else>
+            아이디를 입력해주세요 <br>
+            <input type="text" v-model="id">
+        </p>
+        
+        <button v-on:click="canAddCart = !canAddCart">임시 canAddCart 버튼</button>
+
+        <div v-if="canAddCart">
+            <p>상품이 있습니다</p>
+            <button>구매 가능합니다</button>
+        </div>
+        <div v-else>
+            <p>상품이 없습니다</p>
+            <button disabled>구매 불가능합니다</button>
+        </div>
+
+        <p>{{canAddCart ? "상품이 있습니다":"상품이 없습니다"}}</p>
+        <button v-bind:disabled="!canAddCart">
+            {{canAddCart ? "구매 가능합니다":"구매 불가능합니다"}}
+        </button>
+
+        <h3 v-show="canAddCart">상품이 있으므로 보입니다</h3>
+        <!-- v-show는 false여도 생성은 하지만 display:none으로 만듬-->
+
+
+    </div>
+
+    <script>
+        new Vue({
+            el : "#app",
+            data : {
+                error : "값", // 문자열 없을시 false로 인식, 값 있을시 true 인식
+                appear : false,
+                login : false,
+                id : "",
+                canAddCart : true
+            }
+        });
+    </script>
+</body>
+</html>

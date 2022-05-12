@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mini prject</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./common.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div style="width: 100%; height: 2000px;" id="app" v-bind:style="{'background-image':'url(./'+ran+')'}">
+        <time-component style="text-align: center;"></time-component>
+        <h1 id="greeting"></h1>
+
+        <!--아이디 폼--> <!--메모와 투두 폼-->
+        <login-component @memo-add="memo_add" @todo-add="todo_add"></login-component>
+        
+        <!--투두 보드-->
+        <todo-component v-bind:todolist="todolist"></todo-component>
+
+        <!--메모 보드-->
+        <div class="flex" id="memo-board" v-for="(m,index) in memolist">
+            <div>
+                {{m}}
+            </div>
+            <button class="edit" @click="edit(index)">edit</button>
+        </div>
+
+    </div>
+
+    <!-- body 아래 스크립트 시작 -->
+    <script src="./todo.js"></script>
+    <script src="./time.js"></script>
+    <script src="./login.js"></script>
+    <script src="./main.js"></script>
+</body>
+</html>

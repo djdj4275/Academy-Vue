@@ -1,0 +1,7 @@
+deletememo : delete라는 사용자지정 이벤트로서 props id에 넣어진 0,1,2의 수를 부모요소로 들고감
+
+
+deleteMemo : id라는 매개변수(위에서 들고온 props id값)를 받아와 실행 
+                   foreach로 각 요소마다 꺼내서 비교 받아온 요소의 id값과(element.id)와 id값 비교 (i는 임의의 인덱스값)
+                   ex.[id:0, memo:~~] 는 (element, i) = (0,0)
+                   동일시 index값을 부여

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <!-- v-app으로 감싸서 실행 -->
+        <v-app>
+            <v-app-bar app color="primary" dark fixed>
+                <!-- 좌측에 메뉴아이콘 -->
+                <v-app-bar-nav-icon></v-app-bar-nav-icon>
+                <v-toolbar-title>마스터페이지</v-toolbar-title>
+                <!-- spacer는 사이 간격을 띄워줌 -->
+                <v-spacer></v-spacer>
+                <!-- button이지만 icon을 옵션으로 넣어주면 icon형태가 됨 -->
+                <v-btn icon>
+                    <!-- 머티리얼 공식디자인에서 가져온 아이콘 -->
+                    <!-- 위의 머티리얼 공식사이트를 링크로 연결해주었기때문에 사용가능 -->
+                    <!-- 공식디자인의 이름을 가져와서 작성해주면 된다. -->
+                    <v-icon>mdi-dots-vertical</v-icon>
+                </v-btn>
+            </v-app-bar>
+
+            <v-content>
+                <v-container>
+                    <!-- display는 크기(숫자따라 다름), m은 margin, a는 all, 숫자는 수치 -->
+                    <!-- t는 top, b는 bottom, l은 left, r은 right, p는 padding -->
+                    <!-- x는 좌우, y는 상하 , red--text는 글자색, 그 뒤에 그냥 색은 배경색-->
+                    <!-- 이때 색은 머티리얼 디자인에서 지정된 색 가능 -->
+                    <!-- html태그에 뷰티파이 디자인을 넣을때 class를 통해서 접근 -->
+                    <h1 class="display-2 my-10 red--text">안녕하세요</h1>
+                    <p class="body-2">마스터 페이지입니다</p>
+
+                    <!-- text-darken은 글자 어둡게 -->
+                    <!-- divider는 구분선 -->
+                    <v-divider></v-divider>
+                    <v-btn color="indigo--text success text--darken-2">버튼입니다</v-btn>
+
+                </v-container>
+            </v-content>
+
+            <!-- primary, secondary, accent, error, info, success, warning 의 7가지 지정색 존재-->
+            <v-footer color="secondary" dark fixed>
+                <div class="mx-auto">Copyright &copy;</div>
+            </v-footer>
+
+        </v-app>
+    </div>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        vuetify: new Vuetify(),
+    })
+</script>
+</body>
+</html>

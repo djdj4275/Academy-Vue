@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="memo">
+        <button @click="addMemo">추가</button> 
+        <memo-component v-for="m in memolist"  v-bind:id="m.id" v-bind:key="m.id" @delete="deleteMemo">
+            {{m.memo}}<!--배열인 memolist의 값을 하나씩 들고올때마다 각 배열의 memo-component의 props id값을 memolist그 배열의 id값과 동일하게 만듬-->
+        </memo-component>  <!--for문시 같이 key값을 사용해주면 좋음-->
+    </div>
+
+    <!-- 사용할 컴포넌트 -->
+    <script src="./component/memocomponent.js"></script>
+
+    <!-- 뷰 인스턴스 -->
+    <script src="./main.js"></script>
+</body>
+</html>

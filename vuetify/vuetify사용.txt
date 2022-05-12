@@ -1,0 +1,2 @@
+vuetify 검색후 홈페이지 들어가서 get started 들어가서 
+밑의 cdn에 link 3개와 vuetify 스크립트 1개를 복사해 사용

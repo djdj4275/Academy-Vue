@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <p>{{message}}</p>
+        <!-- 메소드는 이벤트나 이름을 적어서 직접 호출해서 사용 -->
+        <button @click="changeMessage('입력받은값')">메세지 바꿈</button>
+        <button @click="clickBtn">버튼메소드를 이용해서 메세지 바꿈</button>
+
+        <p>{{reverseMessage}}</p>
+        <p>{{rm}}</p>
+
+        <!-- data의 값이 변경되었을때 계산값을 보여줄때 computed -->
+        <p>{{message.split('').reverse().join('')}}</p>
+    </div>
+
+    <script>
+        // 자바스크립트 객체()
+        let pen = {
+            // 속성
+            length : 10,
+            // 메소드
+            write : function() {
+                return "글을 씁니다";
+            }
+        };
+
+        // Vue 인스턴스
+        new Vue({
+            el : "#app",
+            data : {
+                message : "메시지입니다",
+                rm : "", // 뒤집어진 메세지
+            },
+            methods : {
+                changeMessage : function(m) {
+                    this.message = m+"입니다";
+                },
+                clickBtn : function() {
+                    // 메소드는 직접 호출하여 사용가능
+                    this.changeMessage(pen.write());
+                    this.reverseMsg();
+                },
+                reverseMsg : function() {
+                    this.rm = this.message.split('').reverse().join('');
+                },
+                // methods는 호출시 
+            },
+            computed : {
+                reverseMessage : function() {
+                    return this.message.split('').reverse().join('');
+                }
+                // computed는 변경되는 영역을 자동적 도출되게끔
+            } // 위의 식을 methods에 옮기면 식이 도출됨
+        });
+
+        // methods나 computed나 코드 입력 형식은 같지만
+        // methods는 렌더링 발생시마다 매번 실행되지만
+        // computed는 참고로 하는 message 같은 값이 변경되어야만 실행된다.
+    </script>
+
+</body>
+</html>

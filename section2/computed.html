@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <h1>computed속성의 사용법</h1>
+        <input type="text" v-model="pay">
+        <br>
+        <label for="">할인율</label>
+        <input type="text" v-model="per">
+        <!-- computed를 사용하면 긴표현식의 내용을 함수 형식으로 사용할 수 있다-->
+        <p>{{per}}% 할인된 가격 : {{ discount }}</p>
+
+        <h3>computed - 배열의 filter 메소드와 문자열의 match 메소드를 사용한 필터링</h3>
+        <label for="">도시 검색</label>
+        <input type="text" v-model="searchCity">
+        <ul>
+            <li v-for="city in cityfilter">{{ city }}</li>
+        </ul>
+        <ul>
+            <li v-for="city in cities">{{ city }}</li>
+        </ul>
+
+        <h1>computed 속성 실습 (값 거꾸로 출력)</h1>
+        <input type="text" v-model="text">
+        <p>{{reverseText}}</p>
+    </div>
+
+    <script>
+        new Vue({
+            el : "#app",
+            data : {
+                pay : 1000,
+                per : 40,
+                searchCity : "",
+                cities : ["Seoul", "Paris", "Seattle"],
+                text : ""
+            },
+            computed : { // computed는 수식으로 짜여진 함수 모음
+                // 기본적으로 값을 돌려주기위해 return에 작성
+                discount : function() {
+                    return this.pay*((100-this.per)*0.01);
+                },
+                cityfilter : function() {
+                    return this.cities.filter( city => 
+                    city.toUpperCase().match( this.searchCity.toUpperCase() ) )
+                    // 화살표함수의 this는 자기자신의 함수가 아니라 자신을 감싸고 있는 함수나 객체의 this이다.
+                },  // toUpperCase는 소문자를 대문자로 만듬
+                reverseText : function() {
+                    return this.text.split("").reverse().join("");
+                    // split은 공백을 기준으로 값을 잘라서 배열로 만듬
+                    // reverse는 문자열을 반대로 만듬
+                    // join은 split과 반대로 배열을 문자열로 합쳐주는 속성
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

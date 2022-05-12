@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <v-app>
+            <v-app-bar app color="primary" dark>
+                <v-app-bar-nav-icon @click="ndrawer = true"></v-app-bar-nav-icon>
+                <v-toolbar-title>Header입니다</v-toolbar-title>
+            </v-app-bar>
+
+            <v-navigation-drawer absolute temporary v-model="ndrawer"> 
+                <!--temporary 사용시 나타나는 부분이 가장 위로 나옴-->
+                <v-toolbar flat height="70px"> <!--flat은 디자인 (종이같은 디자인)-->
+                    <v-list>
+                        <v-list-item>
+                            <v-list-item-avatar>
+                                <img src="" alt="">
+                            </v-list-item-avatar>
+                            <v-list-item-content>
+                                <v-list-item-title> 홍길동 </v-list-item-title>
+                                <v-list-item-subtitle> 로그인 </v-list-item-subtitle>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list>
+                </v-toolbar>
+                <v-divider></v-divider>
+
+                <!-- 메뉴리스트 -->
+                <v-list>
+                    <v-list-item @click="" v-for="m in itemList" :href="m.link">
+                        <v-list-item-action>
+                            <v-icon class="red--text">{{m.icon}}</v-icon>
+                        </v-list-item-action>
+                        <v-list-item-content>
+                            <v-list-item-title>
+                                {{m.title}}
+                            </v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list>
+
+            </v-navigation-drawer>
+        </v-app>
+    </div>
+
+
+
+    <script>
+        new Vue({
+            el : "#app",
+            vuetify : new Vuetify(),
+            data : {
+                ndrawer : false,
+                itemList : [
+                    {
+                        title : '스타벅스',
+                        icon : 'mdi-coffee-maker',
+                        link : 'https://www.starbucks.com'
+                    },
+                    {
+                        title : '애플',
+                        icon : 'mdi-apple',
+                        link : 'https://www.apple.com' 
+                    },
+                    {
+                        title : '페이스북',
+                        icon : 'mdi-facebook',
+                        link : 'https://www.facebook.com' 
+                    },
+                ]
+            }
+        })
+    </script>
+
+</body>
+</html>

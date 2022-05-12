@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <button @click="change">버튼을 누르면 input이 바뀝니다</button>
+
+        <input v-if="buttonName" type="text" v-model="name" placeholder="사용자 이름을 입력하세요">
+        <input v-else type="text" v-model="email" placeholder="이메일 주소를 입력하세요">
+    </div>
+
+    <script>
+        new Vue({
+            el : "#app",
+            data : {
+                name : "",
+                email : "",
+                buttonName : true
+            },
+            methods : {
+                change : function() {
+                    this.buttonName = !this.buttonName;
+                }
+            } // 사용자 이름 입력후 버튼을 누르고 이메일 입력후 다시 누르면
+            // 원래 적었던 내용들이 저장후 다시 나오게 됨
+        });
+    </script>
+
+</body>
+</html>

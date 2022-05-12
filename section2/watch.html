@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <label for="">십진수</label>
+        <input type="text" v-model="dec">
+        <label for="">이진수</label>
+        <input type="text" v-model="binary">
+    </div>
+
+    <script>
+        new Vue({
+            el : "#app",
+            data : {
+                dec : 0,
+                binary : 0
+            },
+            watch : {
+                dec : function(val) {
+                    this.dec = val;
+                    this.binary = parseInt(val.toString(2));  //toString은 십진수를 원하는 진수로 변환
+                },
+                binary : function(val) {
+                    this.binary = val;
+                    this.dec = parseInt(val, 2); //parseInt는 십진수로 변환
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

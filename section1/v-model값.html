@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    
+    <div id="app">
+
+        <h1>v-model의 값</h1>
+
+        <!-- 
+            type="text"일때
+            v-model은 value값을 양방향으로 바인딩한다.
+        -->
+        <input type="text" v-model="text">
+        <br>
+
+        <!--v-model에 연겨로딘 data속성이 배열이 아닐때 checked의 boolean값을 들고온다-->
+        <input type="checkbox" v-model="checked"> 
+        <br>
+
+        <!--
+            type="checkbox"일때 v-model에 연결된 data 속성이 배열일때
+            value값을 들고올 수 있다. 
+        -->
+        <input type="checkbox" name="check" value="확인" v-model="ok">
+        <input type="checkbox" name="check" value="종료" v-model="ok">
+        <br>
+
+        <!--type="radio"는 value값이 없으면 null을 반환-->
+        <input type="radio" v-model="num">확인
+        <br>
+
+        <!--type="radio"는 같은 name의 선택된 value 값 반환-->
+        <input type="radio" name="radio" value="홀" v-model="num">1
+        <input type="radio" name="radio" value="짝" v-model="num">2
+        <br>
+
+    </div>
+
+    <script>
+        new Vue({
+            el : "#app",
+            data : {
+                text : "미리 작성된 텍스트입니다",
+                checked : false,
+                ok : [],
+                num : ""
+            }
+        });
+    </script>
+
+</body>
+</html>

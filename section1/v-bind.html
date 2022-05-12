@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <style>
+        .blue_style {
+            color: blue;
+        }
+        /*red_style*/
+        .red_style {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="app">
+        <h3 v-bind:class="sColor+'_style'">Vue bind</h3> <!--class 명이 blue_style로 적용됨-->
+        <!--
+            bind로 접근할 수 있는 대표적인 값
+            - 이미지 scr, a의 href, class, style, key
+        -->
+        <input type="text" :value="sDate" :disabled="disable">
+        <p>{{ sTime }}</p> <!--마스테치({{}})는 속성값이 아닌 텍스트값을 넣을때 사용-->
+    </div>
+
+    <div id="app2">
+        <h2>v-bind 실습</h2>
+        <p>{{ name+"입니다" }}</p>
+        <p>{{1-30}}</p>
+        <input type="checkbox" :checked="checked">
+        <img src="" alt="" :src="image">
+
+        <h3>머스테치의 사용방법</h3>
+        <p>산술연산자 사용가능 : {{1-30}}</p>
+        <p>관계, 비교 연산자 사용가능 : {{1>40}}</p>
+        <p>삼항 연산자 사용가능 : {{1>40 ? "참입니다" : "거짓입니다"}}</p>
+        <p>
+            data의 값을 넣어서 연산자 사용가능 : 
+            {{ sColor == "red" ? "빨간색" : "파란색" }}
+        </p>
+    </div>
+
+    <script>
+        new Vue({
+            el : '#app',
+            data : {
+                sDate : "현재 년도 : "+ new Date().getFullYear(),
+                sColor : "red", // 컬러이름을 바꿔서 확인
+                sTime : `${new Date().getHours()}:${new Date().getMinutes()}`,
+                disable : true
+            }
+        });
+
+        // vue v-bind 실습 1
+
+        new Vue({
+            el : '#app2',
+            data : {
+                name : "bird",
+                checked : true,
+                sColor : "red",
+                image : "https://cdn.pixabay.com/photo/2017/06/05/07/58/butterfly-2373175_960_720.png"
+            }
+        });
+    </script>
+
+</body>
+</html>
